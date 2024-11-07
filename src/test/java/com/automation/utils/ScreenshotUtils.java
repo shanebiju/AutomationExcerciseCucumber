@@ -11,4 +11,10 @@ public class ScreenshotUtils {
         byte[] screenshot=ts.getScreenshotAs(OutputType.BYTES);
         return new ByteArrayInputStream(screenshot);
     }
+
+    public static byte[] takeScreenshotAsByteArray(){
+        TakesScreenshot ts=(TakesScreenshot) DriverManager.getDriver();
+        byte[] screenshot=ts.getScreenshotAs(OutputType.BYTES);
+        return screenshot;
+    }
 }
