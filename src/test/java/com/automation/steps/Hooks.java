@@ -2,8 +2,11 @@ package com.automation.steps;
 
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
+import com.automation.utils.ScreenshotUtils;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
+import io.qameta.allure.Allure;
 
 public class Hooks {
     @Before
@@ -13,7 +16,10 @@ public class Hooks {
     }
 
     @After
-    public void cleanUp(){
+    public void cleanUp(Scenario scenario){
+        if(scenario.isFailed()){
+            Allure.addAttachment("screenshot",ScreenshotUtils.takeScreenshotAsInputstream());
+        }
         DriverManager.getDriver().quit();
     }
 }
